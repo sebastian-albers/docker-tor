@@ -8,7 +8,7 @@ script:
 # build image
 - docker build -t sebastianalbers/rpi-tor .
 # test image
-- docker run sebastianalbers/rpi-tor /usr/sbin/tor --version
+- docker run sebastianalbers/rpi-tor /usr/bin/tor --version
 after_success:
 # notify Docker Hub to make a new build
 - >
