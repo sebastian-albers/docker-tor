@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+# build platform-specific Docker images
+docker build -f Dockerfile.amd64 -t sebastianalbers/rpi-tor:latest-amd64 .
+docker build -f Dockerfile.arm32v7 -t sebastianalbers/rpi-tor:latest-arm32v7 .
+docker build -f Dockerfile.arm64v8 -t sebastianalbers/rpi-tor:latest-arm64v8 .
+

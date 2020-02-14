@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+# register qemu-*-static for all supported processors except the current one
+docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+# generate platform-specific Dockerfiles 
+./generate-dockerfiles.sh
+
