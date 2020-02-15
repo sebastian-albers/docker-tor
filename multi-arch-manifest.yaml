@@ -1,4 +1,5 @@
-image: sebastianalbers/tor:__TAG__
+image: sebastianalbers/tor:latest
+tags: [__TAGS__]
 manifests:
   - image: sebastianalbers/tor:latest-amd64
     platform:
