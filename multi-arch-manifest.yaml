@@ -1,17 +1,16 @@
 image: sebastianalbers/tor:__TAG__
 manifests:
-  - image: sebastianalbers/tor:__TAG__-amd64
+  - image: sebastianalbers/tor:latest-amd64
     platform:
       architecture: amd64
       os: linux
-  - image: sebastianalbers/tor:__TAG__-arm64v8
+  - image: sebastianalbers/tor:latest-arm64v8
     platform:
       architecture: arm64
       os: linux
       variant: v8
-  - image: sebastianalbers/tor:__TAG__-arm32v7
+  - image: sebastianalbers/tor:latest-arm32v7
     platform:
       architecture: arm
       os: linux
       variant: v7
-

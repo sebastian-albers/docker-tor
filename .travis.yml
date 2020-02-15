@@ -16,18 +16,5 @@ script:
 - ./read-version.sh arm32v7
 - ./read-version.sh arm64v8
 after_success:
-# trigger latest build on Docker Hub
+# trigger build on Docker Hub
 - curl -X POST "${DOCKER_HUB_TRIGGER_URL}"
-# read version from Docker container
-- version=$(./read-version.sh amd64)
-# tag Docker images with version
-- docker tag "sebastianalbers/tor:latest-amd64" "sebastianalbers/tor:${version}-amd64"
-- docker tag "sebastianalbers/tor:latest-arm32v7" "sebastianalbers/tor:${version}-arm32v7"
-- docker tag "sebastianalbers/tor:latest-arm64v8" "sebastianalbers/tor:${version}-arm64v8"
-# push images with version to Docker Hub
-- echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-- docker push "sebastianalbers/tor:${version}-amd64"
-- docker push "sebastianalbers/tor:${version}-arm32v7"
-- docker push "sebastianalbers/tor:${version}-arm64v8"
-# push multi-arch image with version to Docker Hub
-- ./push-multi-arch-image.sh "${version}"
