@@ -1,7 +1,7 @@
-sudo: required
+os: linux
+language: shell
 services:
 - docker
-language: bash
 script:
 # register qemu-*-static for all supported processors except the current one
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
