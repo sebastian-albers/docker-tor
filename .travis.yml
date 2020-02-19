@@ -16,5 +16,19 @@ script:
 - ./read-version.sh arm32v7
 - ./read-version.sh arm64v8
 after_success:
-# trigger build on Docker Hub
-- curl -X POST "${DOCKER_HUB_TRIGGER_URL}"
+- echo "The build was triggered by $TRAVIS_EVENT_TYPE."
+- >
+  if [ "$TRAVIS_EVENT_TYPE" == "cron" ]; then
+    version=$(./read-version.sh amd64)
+    if [[ -n $(./version-at-docker-hub.sh "${version}") ]]; then
+      echo "The tag ${version} is already available at Docker Hub."
+      echo "The build on Docker Hub is not triggered."
+    else
+      echo "The tag ${version} is not available at Docker Hub."
+      echo "Triggering build on Docker Hub ..."
+      curl -X POST "${DOCKER_HUB_TRIGGER_URL}"
+    fi
+  else
+    echo "Triggering build on Docker Hub ..."
+    curl -X POST "${DOCKER_HUB_TRIGGER_URL}"
+  fi
