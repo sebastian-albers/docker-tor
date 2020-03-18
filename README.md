@@ -1,6 +1,6 @@
 # Tor
 
-![Travis](https://img.shields.io/travis/com/salbers/docker-tor.svg)
+[![Build Status](https://travis-ci.com/salbers/docker-tor.svg?token=4By62F4TaqJz29wWsCz2&branch=master)](https://travis-ci.com/bitbucket/salbers/docker-tor)
 ![Docker Build Status](https://img.shields.io/docker/cloud/build/sebastianalbers/tor.svg)
 ![Docker Automated build](https://img.shields.io/docker/cloud/automated/sebastianalbers/tor.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/sebastianalbers/tor.svg)
