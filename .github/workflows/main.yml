@@ -1,0 +1,62 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push for the master branch and daily at 0:00
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: '0 0 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Register qemu-*-static for all supported processors except the current one
+        run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+      - name: Generate platform-specific Dockerfile
+        run: ./generate-dockerfiles.sh
+
+      - name: Build platform-specific Docker images
+        run: |
+          docker build -f Dockerfile.amd64 -t $GITHUB_REPOSITORY:latest-amd64 .
+          docker build -f Dockerfile.arm32v7 -t $GITHUB_REPOSITORY:latest-arm32v7 .
+          docker build -f Dockerfile.arm64v8 -t $GITHUB_REPOSITORY:latest-arm64v8 .
+
+      - name: Test platform-specific Docker images
+        run: |
+          ./read-version.sh amd64
+          ./read-version.sh arm32v7
+          ./read-version.sh arm64v8
+
+      - name: Push images to Docker Hub
+        run: |
+          if [ "$GITHUB_EVENT_NAME" == "push" ]; then
+            echo "Pushing images to Docker Hub ..."
+            ./push-images.sh
+          else
+            version=$(./read-version.sh amd64)
+            if [[ -n $(./version-at-docker-hub.sh "${version}") ]]; then
+              echo "The tag ${version} is already available at Docker Hub."
+            else
+              echo "The tag ${version} is not available at Docker Hub."
+              echo "Pushing images to Docker Hub ..."
+              ./push-images.sh
+            fi
+          fi
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
