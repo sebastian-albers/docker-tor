@@ -66,4 +66,5 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: sebastianalbers/tor
+          short-description: ${{ github.event.repository.description }}
 
