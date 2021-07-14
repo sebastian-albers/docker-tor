@@ -1,8 +1,6 @@
 # Tor
 
 [![Build Status](https://github.com/sebastian-albers/docker-tor/actions/workflows/main.yml/badge.svg)](https://github.com/sebastian-albers/docker-tor/actions/workflows/main.yml)
-[![Docker Build Status](https://img.shields.io/docker/cloud/build/sebastianalbers/tor.svg)](https://hub.docker.com/r/sebastianalbers/tor/builds)
-![Docker Automated build](https://img.shields.io/docker/cloud/automated/sebastianalbers/tor.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/sebastianalbers/tor.svg)
 ![Docker Stars](https://img.shields.io/docker/stars/sebastianalbers/tor.svg)
 
