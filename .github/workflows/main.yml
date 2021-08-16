@@ -31,9 +31,9 @@ jobs:
 
       - name: Build platform-specific Docker images
         run: |
-          docker build -f Dockerfile.amd64 -t $GITHUB_REPOSITORY:latest-amd64 .
-          docker build -f Dockerfile.arm32v7 -t $GITHUB_REPOSITORY:latest-arm32v7 .
-          docker build -f Dockerfile.arm64v8 -t $GITHUB_REPOSITORY:latest-arm64v8 .
+          docker build -f Dockerfile.amd64 -t sebastianalbers/tor:latest-amd64 .
+          docker build -f Dockerfile.arm32v7 -t sebastianalbers/tor:latest-arm32v7 .
+          docker build -f Dockerfile.arm64v8 -t sebastianalbers/tor:latest-arm64v8 .
 
       - name: Test platform-specific Docker images
         run: |
