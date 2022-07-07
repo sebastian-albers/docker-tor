@@ -4,7 +4,7 @@ __CROSS_# download QEMU
 __CROSS_ENV QEMU_URL https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-4/x86_64_qemu-__QEMU_ARCH__-static.tar.gz
 __CROSS_RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf -
 __CROSS_
-FROM __BASEIMAGE_ARCH__/alpine:3.14
+FROM __BASEIMAGE_ARCH__/alpine:3.11
 __CROSS_
 __CROSS_# Add QEMU
 __CROSS_COPY --from=builder qemu-__QEMU_ARCH__-static /usr/bin
