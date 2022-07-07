@@ -11,7 +11,7 @@ __CROSS_COPY --from=builder qemu-__QEMU_ARCH__-static /usr/bin
 
 EXPOSE 9050
 
-RUN apk --no-cache --update add tor
+RUN apk --no-cache --update add tor curl
 COPY torrc /etc/tor/torrc
 
 VOLUME ["/var/lib/tor"]
