@@ -1,4 +1,4 @@
-name: CI
+name: latest-release
 
 # Controls when the workflow will run
 on:
@@ -25,8 +25,8 @@ jobs:
 
       - name: Enable automatic GitHub workflow
         run: |
-         gh workflow disable main.yml
-         gh workflow enable main.yml
+         gh workflow disable latest-release.yml
+         gh workflow enable latest-release.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -74,4 +74,3 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: sebastianalbers/tor
           short-description: ${{ github.event.repository.description }}
-
