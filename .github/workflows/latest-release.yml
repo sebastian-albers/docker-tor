@@ -23,13 +23,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Enable automatic GitHub workflow
-        run: |
-         gh workflow disable latest-release.yml
-         gh workflow enable latest-release.yml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Register qemu-*-static for all supported processors except the current one
         run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
